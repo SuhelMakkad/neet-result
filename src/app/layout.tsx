@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme/theme-provider";
 import { NavBar } from "@/components/navbar";
 
 import "@/styles/globals.css";
+import { QueryProvider } from "@/query/query-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,16 +25,18 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body className={`${inter.className} bg-background text-primary antialiased`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <NavBar />
+        <QueryProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <NavBar />
 
-          {children}
-        </ThemeProvider>
+            {children}
+          </ThemeProvider>
+        </QueryProvider>
       </body>
     </html>
   );
