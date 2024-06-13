@@ -1,11 +1,6 @@
-"use client";
-
-import { use24ResultsQuery } from "@/query/use-24-results-query";
-import { ResultsTable } from "@/components/results-table";
+import { Results } from "./components/Results";
 
 export default function Home() {
-  const { data, isLoading } = use24ResultsQuery();
-
   return (
     <main className="container">
       <header className="text-center my-8">
@@ -15,36 +10,7 @@ export default function Home() {
         </p>
       </header>
 
-      <section>
-        <ResultsTable
-          data={[
-            {
-              id: "728ed52f",
-              amount: 100,
-              status: "pending",
-              email: "m@example.com",
-            },
-            {
-              id: "728ed52f",
-              amount: 100,
-              status: "pending",
-              email: "a@example.com",
-            },
-            {
-              id: "hbaerag",
-              amount: 10,
-              status: "pending",
-              email: "b@example.com",
-            },
-            {
-              id: "sdasd",
-              amount: 90,
-              status: "pending",
-              email: "c@example.com",
-            },
-          ]}
-        />
-      </section>
+      <Results />
     </main>
   );
 }

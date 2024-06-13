@@ -11,12 +11,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Result } from "@/utils/types";
 
-interface DataTableProps<TData, TValue> {
+type DataTableProps<TData> = {
   data: TData[];
-}
+};
 
-export const ResultsTable = <TData, TValue>({ data }: DataTableProps<TData, TValue>) => {
+export const ResultsTable = ({ data }: DataTableProps<Result>) => {
   const table = useReactTable({
     data,
     columns,

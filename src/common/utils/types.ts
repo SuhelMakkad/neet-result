@@ -1,8 +1,8 @@
 export type Result = {
   id: string;
   displayName: string;
-  marks: number;
-  air: number;
+  marks: number | "NA";
+  air: number | "NA";
 };
 
 export type IncomingResult = {
