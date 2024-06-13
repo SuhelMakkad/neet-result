@@ -5,5 +5,7 @@ export const use24ResultsQuery = () => {
   return useQuery({
     queryKey: ["24-results"],
     queryFn: () => get24Results(),
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
   });
 };
