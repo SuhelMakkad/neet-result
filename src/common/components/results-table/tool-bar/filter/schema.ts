@@ -1,5 +1,14 @@
 import { z } from "zod";
 
+export const operators = {
+  GREATER_THAN: "gt",
+  LESS_THAN: "lt",
+  GREATER_THAN_EQUAL: "gte",
+  LESS_THAN_EQUAL: "lte",
+  EQUAL: "eq",
+  NOT_EQUAL: "ne",
+};
+
 export const filedOptions = [
   { label: "Marks", value: "marks" },
   { label: "AIR", value: "air" },
@@ -7,12 +16,12 @@ export const filedOptions = [
 ];
 
 export const operatorOptions = [
-  { label: ">", value: "gt" },
-  { label: "<", value: "lt" },
-  { label: ">=", value: "gte" },
-  { label: "<=", value: "lte" },
-  { label: "=", value: "eq" },
-  { label: "!=", value: "ne" },
+  { label: ">", value: operators.GREATER_THAN },
+  { label: "<", value: operators.LESS_THAN },
+  { label: ">=", value: operators.GREATER_THAN_EQUAL },
+  { label: "<=", value: operators.LESS_THAN_EQUAL },
+  { label: "=", value: operators.EQUAL },
+  { label: "!=", value: operators.NOT_EQUAL },
 ];
 
 export const defaultState = {

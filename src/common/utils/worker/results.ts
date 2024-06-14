@@ -1,8 +1,8 @@
 import { expose } from "comlink";
 import { get24Results } from "@/api/index";
 import { DATA_PER_PAGE } from "@/utils/constants";
+import { operators, type FiltersSchema } from "@/components/results-table/tool-bar/filter/schema";
 import type { Result } from "@/utils/types";
-import type { FiltersSchema } from "@/components/results-table/tool-bar/filter/schema";
 
 type GetResultsParams = {
   pageNo: number;
@@ -42,17 +42,17 @@ export class Results {
         if (!fieldValue) return false;
 
         switch (operator) {
-          case "gt":
+          case operators.GREATER_THAN:
             return fieldValue > value;
-          case "lt":
+          case operators.LESS_THAN:
             return fieldValue < value;
-          case "gte":
+          case operators.GREATER_THAN_EQUAL:
             return fieldValue >= value;
-          case "lte":
+          case operators.LESS_THAN_EQUAL:
             return fieldValue <= value;
-          case "eq":
+          case operators.EQUAL:
             return fieldValue === value;
-          case "ne":
+          case operators.NOT_EQUAL:
             return fieldValue !== value;
           default:
             return false;
