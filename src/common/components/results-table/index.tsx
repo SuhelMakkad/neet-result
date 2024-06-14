@@ -12,6 +12,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Result } from "@/utils/types";
+import { ToolBar } from "./tool-bar";
 
 type DataTableProps<TData> = {
   data: TData[];
@@ -25,8 +26,10 @@ export const ResultsTable = ({ data }: DataTableProps<Result>) => {
   });
 
   return (
-    <div className="rounded-md border">
-      <Table>
+    <div className="space-y-3">
+      <ToolBar />
+
+      {/* <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
@@ -61,7 +64,7 @@ export const ResultsTable = ({ data }: DataTableProps<Result>) => {
             </TableRow>
           )}
         </TableBody>
-      </Table>
+      </Table> */}
     </div>
   );
 };
