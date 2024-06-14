@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { useWorker } from "@/components/worker-context/use-worker";
+import { useFilters } from "@/hooks/use-filters";
 
 export const useResultsFetch = () => {
   const { worker, isLoaded } = useWorker();
@@ -13,12 +14,13 @@ export const useResultsFetch = () => {
   });
 };
 
-export const useResults = (page: number, pageSize?: number) => {
+export const useResults = () => {
   const { worker, isLoaded } = useWorker();
+  const { pageNo, pageSize, search } = useFilters();
 
   return useQuery({
-    queryKey: ["results", page, pageSize, isLoaded],
-    queryFn: () => worker?.getResults(page, pageSize),
+    queryKey: ["results", isLoaded, pageNo, pageSize, search],
+    queryFn: () => worker?.getResults({ pageNo, pageSize, search }),
     refetchOnMount: false,
     refetchOnWindowFocus: false,
     enabled: isLoaded,

@@ -15,12 +15,10 @@ import {
 
 import { ToolBar } from "./tool-bar";
 import { Pagination } from "./pagination";
-import { useFilters } from "@/hooks/use-filters";
 import { PageSizeSelect } from "./page-size-select";
 
 export const ResultsTable = () => {
-  const { pageNo, pageSize } = useFilters();
-  const { data } = useResults(pageNo, pageSize);
+  const { data } = useResults();
 
   const table = useReactTable({
     data: data?.data || [],

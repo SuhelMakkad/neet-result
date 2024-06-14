@@ -8,6 +8,7 @@ export const useFilters = () => {
 
   const pageNo = +(searchParam.get("page")?.toString() || 1);
   const pageSize = +(searchParam.get("pageSize")?.toString() || 10);
+  const search = searchParam.get("search")?.toString() || "";
 
   const updateSearchParam = (key: string, value: string) => {
     const newSearchParam = new URLSearchParams(searchParam.toString());
@@ -26,10 +27,16 @@ export const useFilters = () => {
     updateSearchParam("pageSize", pageSize);
   };
 
+  const updateSearch = (search: string) => {
+    updateSearchParam("search", search || "");
+  };
+
   return {
     pageNo,
     pageSize,
+    search,
     updatePageNo,
     updatePageSize,
+    updateSearch,
   };
 };
