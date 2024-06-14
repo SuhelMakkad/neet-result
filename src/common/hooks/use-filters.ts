@@ -7,6 +7,7 @@ export const useFilters = () => {
   const router = useRouter();
 
   const pageNo = +(searchParam.get("page")?.toString() || 1);
+  const pageSize = +(searchParam.get("pageSize")?.toString() || 10);
 
   const updateSearchParam = (key: string, value: string) => {
     const newSearchParam = new URLSearchParams(searchParam.toString());
@@ -21,8 +22,14 @@ export const useFilters = () => {
     updateSearchParam("page", pageNo.toString());
   };
 
+  const updatePageSize = (pageSize: string) => {
+    updateSearchParam("pageSize", pageSize);
+  };
+
   return {
     pageNo,
+    pageSize,
     updatePageNo,
+    updatePageSize,
   };
 };

@@ -16,10 +16,11 @@ import {
 import { ToolBar } from "./tool-bar";
 import { Pagination } from "./pagination";
 import { useFilters } from "@/hooks/use-filters";
+import { PageSizeSelect } from "./page-size-select";
 
 export const ResultsTable = () => {
-  const { pageNo } = useFilters();
-  const { data } = useResults(pageNo);
+  const { pageNo, pageSize } = useFilters();
+  const { data } = useResults(pageNo, pageSize);
 
   const table = useReactTable({
     data: data?.data || [],
@@ -31,7 +32,7 @@ export const ResultsTable = () => {
     <div className="space-y-3">
       <ToolBar />
 
-      <Table>
+      <Table onKeyDown={console.log}>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
@@ -69,9 +70,12 @@ export const ResultsTable = () => {
       </Table>
 
       <div className="flex items-center md:flex-row flex-col-reverse gap-4 justify-between">
-        <span className="text-sm text-secondary-foreground">
-          Showing {data?.data.length} of {data?.total} results
-        </span>
+        <div className="flex items-center gap-2">
+          <span className="text-sm text-secondary-foreground">
+            Showing {data?.data.length} of {data?.total} results
+          </span>
+          <PageSizeSelect />
+        </div>
 
         <Pagination totalPages={data?.totalPages || 1} />
       </div>
