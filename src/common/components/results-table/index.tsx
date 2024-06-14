@@ -30,7 +30,7 @@ export const ResultsTable = () => {
     <div className="space-y-3">
       <ToolBar />
 
-      <Table onKeyDown={console.log}>
+      <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>

@@ -58,6 +58,8 @@ export const filterFormSchema = z.object({
   filters: filtersSchema,
 });
 
+export type FiltersSchema = z.infer<typeof filtersSchema>;
+
 export type FilterState = z.infer<typeof filterFormSchema>["filters"][number];
 
 export type FormValues = z.infer<typeof filterFormSchema>;

@@ -2,11 +2,7 @@
 
 import { useMemo } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import {
-  FilterState,
-  filterFormSchema,
-  filtersSchema,
-} from "@/components/results-table/tool-bar/filter/schema";
+import { FilterState, filtersSchema } from "@/components/results-table/tool-bar/filter/schema";
 
 export const useFilters = () => {
   const searchParam = useSearchParams();

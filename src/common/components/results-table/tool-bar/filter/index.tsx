@@ -32,7 +32,7 @@ export const Filter = () => {
   const { filters, updateFilters } = useFilters();
   const form = useForm<FormValues>({
     resolver: zodResolver(filterFormSchema),
-    defaultValues: filters.length ? { filters } : { ...defaultFormState },
+    defaultValues: { filters: filters.length ? [...filters] : [defaultState] },
   });
 
   const { fields, append, remove } = useFieldArray({
@@ -70,9 +70,7 @@ export const Filter = () => {
       open={open}
       onOpenChange={(state) => {
         setOpen(state);
-        if (!state) {
-          form.reset({ filters: filters.length ? filters : [{ ...defaultState }] });
-        }
+        form.reset({ filters: filters.length ? [...filters] : [defaultState] });
       }}
     >
       <PopoverTrigger asChild>
@@ -92,7 +90,10 @@ export const Filter = () => {
             {fields.map((filter, index) => (
               <div key={filter.id}>
                 <div className="flex items-center gap-2">
-                  <Select onValueChange={(value) => handleChangeFilter(index, "field", value)}>
+                  <Select
+                    defaultValue={filter.field}
+                    onValueChange={(value) => handleChangeFilter(index, "field", value)}
+                  >
                     <SelectTrigger className="w-28 shrink-0">
                       <SelectValue placeholder="Field" />
                     </SelectTrigger>
@@ -105,7 +106,10 @@ export const Filter = () => {
                     </SelectContent>
                   </Select>
 
-                  <Select onValueChange={(value) => handleChangeFilter(index, "operator", value)}>
+                  <Select
+                    defaultValue={filter.operator}
+                    onValueChange={(value) => handleChangeFilter(index, "operator", value)}
+                  >
                     <SelectTrigger className="md:w-28 w-[6.5rem] shrink-0">
                       <SelectValue placeholder="Operator" />
                     </SelectTrigger>
@@ -122,7 +126,7 @@ export const Filter = () => {
                     type="number"
                     placeholder="Value"
                     className="md:w-28 w-20 shrink-0"
-                    defaultValue={0}
+                    defaultValue={filter.value}
                     onBlur={(e) =>
                       handleChangeFilter(index, "value", e.target.value ? +e.target.value : "")
                     }
@@ -153,7 +157,18 @@ export const Filter = () => {
               </div>
             ))}
 
-            <div className="mt-4 flex justify-end">
+            <div className="mt-4 flex justify-end gap-2">
+              <Button
+                type="button"
+                size="sm"
+                variant={"ghost"}
+                onClick={() => {
+                  updateFilters([]);
+                  setOpen(false);
+                }}
+              >
+                Reset
+              </Button>
               <Button size="sm">Apply</Button>
             </div>
           </form>

@@ -16,11 +16,11 @@ export const useResultsFetch = () => {
 
 export const useResults = () => {
   const { worker, isLoaded } = useWorker();
-  const { pageNo, pageSize, search } = useFilters();
+  const { pageNo, pageSize, search, filters } = useFilters();
 
   return useQuery({
     queryKey: ["results", isLoaded, pageNo, pageSize, search],
-    queryFn: () => worker?.getResults({ pageNo, pageSize, search }),
+    queryFn: () => worker?.getResults({ pageNo, pageSize, search, filters }),
     refetchOnMount: false,
     refetchOnWindowFocus: false,
     enabled: isLoaded,
