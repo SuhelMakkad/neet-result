@@ -32,6 +32,9 @@ dependencies:
   clsx:
     specifier: ^2.1.1
     version: 2.1.1
+  comlink:
+    specifier: ^4.4.1
+    version: 4.4.1
   lucide-react:
     specifier: ^0.394.0
     version: 0.394.0(react@18.3.1)
@@ -1227,6 +1230,10 @@ packages:
     engines: {node: '>= 0.8'}
     dependencies:
       delayed-stream: 1.0.0
+    dev: false
+
+  /comlink@4.4.1:
+    resolution: {integrity: sha512-+1dlx0aY5Jo1vHy/tSsIGpSkN4tS9rZSW8FIhG0JH/crs9wwweswIo/POr451r7bZww3hFbPAKnTpimzL/mm4Q==}
     dev: false
 
   /commander@4.1.1:
