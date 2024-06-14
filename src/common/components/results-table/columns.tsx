@@ -9,16 +9,12 @@ export const columns: ColumnDef<Result>[] = [
     header: "Application Number",
   },
   {
-    accessorKey: "air",
-    header: "AIR",
-  },
-  {
     accessorKey: "displayName",
     header: "Name",
   },
   {
-    accessorKey: "marks",
-    header: "Marks",
+    accessorKey: "air",
+    header: "AIR",
   },
   {
     accessorKey: "marks",

@@ -1,4 +1,4 @@
-import { Results } from "./components/Results";
+import { Results } from "./components/results";
 
 export default function Home() {
   return (
