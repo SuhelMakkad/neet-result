@@ -15,9 +15,11 @@ import {
 
 import { ToolBar } from "./tool-bar";
 import { Pagination } from "./pagination";
+import { useFilters } from "@/hooks/use-filters";
 
 export const ResultsTable = () => {
-  const { data } = useResults(1);
+  const { pageNo } = useFilters();
+  const { data } = useResults(pageNo);
 
   const table = useReactTable({
     data: data?.data || [],
@@ -66,7 +68,13 @@ export const ResultsTable = () => {
         </TableBody>
       </Table>
 
-      <Pagination totalPages={data?.totalPages || 1} />
+      <div className="flex items-center md:flex-row flex-col-reverse gap-4 justify-between">
+        <span className="text-sm text-secondary-foreground">
+          Showing {data?.data.length} of {data?.total} results
+        </span>
+
+        <Pagination totalPages={data?.totalPages || 1} />
+      </div>
     </div>
   );
 };

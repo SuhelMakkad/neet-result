@@ -6,6 +6,10 @@ import type { Result } from "@/utils/types";
 export class Results {
   private results: Result[] | null = [];
 
+  constructor() {
+    this.fetchResults();
+  }
+
   async fetchResults() {
     if (this.results?.length) {
       return true;
