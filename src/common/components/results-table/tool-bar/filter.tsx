@@ -108,7 +108,9 @@ export const Filter = () => {
                 </SelectTrigger>
                 <SelectContent>
                   {filedOptions.map((option) => (
-                    <SelectItem value={option.value}>{option.label}</SelectItem>
+                    <SelectItem key={option.value} value={option.value}>
+                      {option.label}
+                    </SelectItem>
                   ))}
                 </SelectContent>
               </Select>
@@ -119,7 +121,9 @@ export const Filter = () => {
                 </SelectTrigger>
                 <SelectContent>
                   {operatorOptions.map((option) => (
-                    <SelectItem value={option.value}>{option.label}</SelectItem>
+                    <SelectItem key={option.value} value={option.value}>
+                      {option.label}
+                    </SelectItem>
                   ))}
                 </SelectContent>
               </Select>

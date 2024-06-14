@@ -1,24 +1,23 @@
 "use client";
 
-import { use24ResultsQuery } from "@/query/use-24-results-query";
+import { useResultsFetch } from "@/query/use-results-query";
 
 import { ResultsTable } from "@/components/results-table";
 import { Error, Loading } from "./page-states";
 
 export const Results = () => {
-  const { data, isLoading, isError } = use24ResultsQuery();
-
+  const { data: isDone, isLoading, isError } = useResultsFetch();
   if (isLoading) {
     return <Loading />;
   }
 
-  if (isError || !data?.length) {
+  if (isError || !isDone) {
     return <Error />;
   }
 
   return (
     <section>
-      <ResultsTable data={data} />
+      <ResultsTable />
     </section>
   );
 };

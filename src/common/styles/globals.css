@@ -81,4 +81,11 @@
   .container .container-full {
     @apply -mx-3 overflow-hidden px-3 md:-mx-5 md:px-5 lg:-mx-8 lg:px-8;
   }
+
+  .number-no-arrow::-webkit-inner-spin-button,
+  .number-no-arrow::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
 }

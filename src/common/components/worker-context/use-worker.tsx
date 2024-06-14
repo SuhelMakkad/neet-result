@@ -29,10 +29,9 @@ export const useWorker = () => {
 
   useEffect(() => {
     if (typeof Worker === "undefined") {
+      context.setIsLoaded(false);
       return;
     }
-
-    context.setIsLoaded(false);
 
     let worker: Worker;
     const setWorker = async () => {

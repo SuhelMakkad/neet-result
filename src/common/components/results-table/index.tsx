@@ -1,6 +1,7 @@
 "use client";
 
 import { flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
+import { useResults } from "@/query/use-results-query";
 import { columns } from "./columns";
 
 import {
@@ -11,16 +12,15 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Result } from "@/utils/types";
+
 import { ToolBar } from "./tool-bar";
+import { Pagination } from "./pagination";
 
-type DataTableProps<TData> = {
-  data: TData[];
-};
+export const ResultsTable = () => {
+  const { data } = useResults(1);
 
-export const ResultsTable = ({ data }: DataTableProps<Result>) => {
   const table = useReactTable({
-    data,
+    data: data?.data || [],
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
@@ -29,7 +29,7 @@ export const ResultsTable = ({ data }: DataTableProps<Result>) => {
     <div className="space-y-3">
       <ToolBar />
 
-      {/* <Table>
+      <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
@@ -64,7 +64,9 @@ export const ResultsTable = ({ data }: DataTableProps<Result>) => {
             </TableRow>
           )}
         </TableBody>
-      </Table> */}
+      </Table>
+
+      <Pagination totalPages={data?.totalPages || 1} />
     </div>
   );
 };
