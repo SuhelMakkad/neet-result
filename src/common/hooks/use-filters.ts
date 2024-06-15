@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FilterState, filtersSchema } from "@/components/results-table/tool-bar/filter/schema";
+import { scrollToTop } from "@/utils/helpers";
 
 export const useFilters = () => {
   const searchParam = useSearchParams();
@@ -32,6 +33,7 @@ export const useFilters = () => {
     router.push(`/?${newSearchParam.toString()}`, {
       scroll: false,
     });
+    scrollToTop();
   };
 
   const updatePageNo = (pageNo: number) => {

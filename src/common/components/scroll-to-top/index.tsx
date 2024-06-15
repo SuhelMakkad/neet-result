@@ -1,17 +1,8 @@
 "use client";
 
-import { MoveUp } from "lucide-react";
 import { useIntersectionObserver } from "usehooks-ts";
-
-const scrollToTop = () => {
-  if (typeof window === "undefined") return;
-
-  window.scrollTo({
-    left: 0,
-    top: 0,
-    behavior: "smooth",
-  });
-};
+import { MoveUp } from "lucide-react";
+import { scrollToTop } from "@/utils/helpers";
 
 const ScrollToTop = () => {
   const { isIntersecting, ref } = useIntersectionObserver();

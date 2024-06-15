@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useFilters } from "@/hooks/use-filters";
+import { useEffect, useState } from "react";
 
 interface PaginationProps {
   totalPages: number;
@@ -8,6 +9,18 @@ interface PaginationProps {
 
 export const Pagination = ({ totalPages }: PaginationProps) => {
   const { pageNo, updatePageNo } = useFilters();
+
+  const handleUpdatePageNo = (page: string) => {
+    let pageNo = +(page || 1);
+
+    if (pageNo > totalPages) {
+      pageNo = +(page = totalPages.toString());
+    } else if (pageNo < 1) {
+      pageNo = +(page = "1");
+    }
+
+    updatePageNo(pageNo || 1);
+  };
 
   return (
     <div className="flex items-center justify-end gap-2">
@@ -27,19 +40,15 @@ export const Pagination = ({ totalPages }: PaginationProps) => {
         step={1}
         min={1}
         max={totalPages}
-        value={pageNo}
+        defaultValue={pageNo}
         className="max-w-24"
-        onChange={(e) => {
-          const target = e.target;
-          let pageNo = +(target.value || 1);
-
-          if (pageNo > totalPages) {
-            pageNo = +(target.value = totalPages.toString());
-          } else if (pageNo < 1) {
-            pageNo = +(target.value = "1");
+        onBlur={(e) => handleUpdatePageNo(e.target.value)}
+        onKeyDown={(e) => {
+          const target = e.target as HTMLInputElement;
+          if (e.key === "Enter") {
+            handleUpdatePageNo(target.value);
+            (document.activeElement as HTMLElement)?.blur();
           }
-
-          updatePageNo(pageNo || 1);
         }}
       />
 
