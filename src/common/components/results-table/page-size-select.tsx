@@ -12,7 +12,7 @@ export const PageSizeSelect = () => {
 
   return (
     <Select onValueChange={updatePageSize} value={pageSize.toString()}>
-      <SelectTrigger className="w-16">
+      <SelectTrigger className="w-20">
         <SelectValue placeholder={pageSize} />
       </SelectTrigger>
       <SelectContent className="w-20">
