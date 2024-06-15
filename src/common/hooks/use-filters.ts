@@ -5,6 +5,11 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { FilterState, filtersSchema } from "@/components/results-table/tool-bar/filter/schema";
 import { scrollToTop } from "@/utils/helpers";
 
+type updateSearchParamArg = {
+  key: string;
+  value: string;
+}[];
+
 export const useFilters = () => {
   const searchParam = useSearchParams();
   const router = useRouter();
@@ -28,9 +33,11 @@ export const useFilters = () => {
     }
   }, [filtersStr]);
 
-  const updateSearchParam = (key: string, value: string) => {
+  const updateSearchParam = (params: updateSearchParamArg) => {
     const newSearchParam = new URLSearchParams(searchParam.toString());
-    newSearchParam.set(key, value);
+    params.forEach(({ key, value }) => {
+      newSearchParam.set(key, value);
+    });
 
     router.push(`/?${newSearchParam.toString()}`, {
       scroll: false,
@@ -39,30 +46,64 @@ export const useFilters = () => {
   };
 
   const updatePageNo = (pageNo: number) => {
-    updateSearchParam("page", pageNo.toString());
+    updateSearchParam([
+      {
+        key: "page",
+        value: pageNo.toString(),
+      },
+    ]);
   };
 
   const updatePageSize = (pageSize: string) => {
-    updateSearchParam("pageSize", pageSize);
+    updateSearchParam([
+      {
+        key: "pageSize",
+        value: pageSize,
+      },
+    ]);
   };
 
   const updateSearch = (search: string) => {
-    updateSearchParam("search", search || "");
+    updateSearchParam([
+      {
+        key: "search",
+        value: search || "",
+      },
+      {
+        key: "page",
+        value: "1",
+      },
+    ]);
   };
 
   const updateSort = (sortKey: string, sortOrder: string) => {
-    const newSearchParam = new URLSearchParams(searchParam.toString());
-    newSearchParam.set("sortKey", sortKey || "");
-    newSearchParam.set("sortOrder", sortOrder || "");
-
-    router.push(`/?${newSearchParam.toString()}`, {
-      scroll: false,
-    });
-    scrollToTop();
+    updateSearchParam([
+      {
+        key: "sortKey",
+        value: sortKey || "",
+      },
+      {
+        key: "sortOrder",
+        value: sortOrder || "",
+      },
+      {
+        key: "page",
+        value: "1",
+      },
+    ]);
   };
 
   const updateFilters = (filters: FilterState[]) => {
-    updateSearchParam("filters", JSON.stringify(filters));
+    updateSearchParam([
+      {
+        key: "filters",
+        value: JSON.stringify(filters),
+      },
+      {
+        key: "page",
+        value: "1",
+      },
+    ]);
   };
 
   return {

@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useFilters } from "@/hooks/use-filters";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface PaginationProps {
   totalPages: number;
@@ -9,6 +9,7 @@ interface PaginationProps {
 
 export const Pagination = ({ totalPages }: PaginationProps) => {
   const { pageNo, updatePageNo } = useFilters();
+  const ref = useRef<HTMLInputElement>(null);
 
   const handleUpdatePageNo = (page: string) => {
     let pageNo = +(page || 1);
@@ -21,6 +22,14 @@ export const Pagination = ({ totalPages }: PaginationProps) => {
 
     updatePageNo(pageNo || 1);
   };
+
+  useEffect(() => {
+    if (!ref.current) {
+      return;
+    }
+
+    ref.current.value = pageNo.toString();
+  }, [pageNo, ref.current]);
 
   return (
     <div className="flex items-center justify-end gap-2">
@@ -35,6 +44,7 @@ export const Pagination = ({ totalPages }: PaginationProps) => {
       </Button>
 
       <Input
+        ref={ref}
         type="number"
         name="page"
         step={1}
