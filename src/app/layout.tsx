@@ -5,6 +5,7 @@ import { QueryProvider } from "@/query/query-provider";
 import { WorkerProvider } from "@/components/worker-context/use-worker";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { NavBar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
 
 import "@/styles/globals.css";
 
@@ -37,6 +38,8 @@ export default function RootLayout({
               <NavBar />
 
               {children}
+
+              <Footer />
             </ThemeProvider>
           </QueryProvider>
         </WorkerProvider>
