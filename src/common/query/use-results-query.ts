@@ -8,8 +8,6 @@ export const useResultsFetch = () => {
   return useQuery({
     queryKey: ["results-fetch", isLoaded],
     queryFn: () => worker?.fetchResults() || false,
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
     enabled: isLoaded,
   });
 };
@@ -21,8 +19,6 @@ export const useResults = () => {
   return useQuery({
     queryKey: ["results", isLoaded, pageNo, pageSize, search],
     queryFn: () => worker?.getResults({ pageNo, pageSize, search, filters }),
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
     enabled: isLoaded,
   });
 };
