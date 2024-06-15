@@ -14,11 +14,11 @@ export const useResultsFetch = () => {
 
 export const useResults = () => {
   const { worker, isLoaded } = useWorker();
-  const { pageNo, pageSize, search, filters } = useFilters();
+  const { pageNo, pageSize, search, filters, sortKey, sortOrder } = useFilters();
 
   return useQuery({
-    queryKey: ["results", isLoaded, pageNo, pageSize, search, filters],
-    queryFn: () => worker?.getResults({ pageNo, pageSize, search, filters }),
+    queryKey: ["results", isLoaded, pageNo, pageSize, search, filters, sortKey, sortOrder],
+    queryFn: () => worker?.getResults({ pageNo, pageSize, search, filters, sortKey, sortOrder }),
     enabled: isLoaded,
   });
 };

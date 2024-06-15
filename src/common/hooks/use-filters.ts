@@ -12,6 +12,8 @@ export const useFilters = () => {
   const pageNo = +(searchParam.get("page")?.toString() || 1);
   const pageSize = +(searchParam.get("pageSize")?.toString() || 10);
   const search = searchParam.get("search")?.toString() || "";
+  const sortKey = searchParam.get("sortKey")?.toString() || "";
+  const sortOrder = searchParam.get("sortOrder")?.toString() || "";
 
   const filtersStr = searchParam.get("filters")?.toString();
   const filters = useMemo(() => {
@@ -48,6 +50,17 @@ export const useFilters = () => {
     updateSearchParam("search", search || "");
   };
 
+  const updateSort = (sortKey: string, sortOrder: string) => {
+    const newSearchParam = new URLSearchParams(searchParam.toString());
+    newSearchParam.set("sortKey", sortKey || "");
+    newSearchParam.set("sortOrder", sortOrder || "");
+
+    router.push(`/?${newSearchParam.toString()}`, {
+      scroll: false,
+    });
+    scrollToTop();
+  };
+
   const updateFilters = (filters: FilterState[]) => {
     updateSearchParam("filters", JSON.stringify(filters));
   };
@@ -56,10 +69,13 @@ export const useFilters = () => {
     pageNo,
     pageSize,
     search,
+    sortKey,
+    sortOrder,
     filters,
     updatePageNo,
     updatePageSize,
     updateSearch,
     updateFilters,
+    updateSort,
   };
 };

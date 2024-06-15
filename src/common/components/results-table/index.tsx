@@ -1,7 +1,15 @@
 "use client";
 
-import { flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
+import { useEffect, useState } from "react";
+import {
+  SortingState,
+  flexRender,
+  getCoreRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
 import { useResults } from "@/query/use-results-query";
+import { useFilters } from "@/hooks/use-filters";
 import { columns } from "./columns";
 
 import {
@@ -18,16 +26,33 @@ import { Pagination } from "./pagination";
 import { PageSizeSelect } from "./page-size-select";
 
 export const ResultsTable = () => {
+  const { sortKey, sortOrder, updateSort } = useFilters();
+  const [sorting, setSorting] = useState<SortingState>([
+    {
+      id: sortKey,
+      desc: sortOrder === "desc",
+    },
+  ]);
   const { data, isLoading } = useResults();
 
   const table = useReactTable({
     data: data?.data || [],
     columns,
     getCoreRowModel: getCoreRowModel(),
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
+    manualSorting: true,
+    state: {
+      sorting,
+    },
   });
 
+  useEffect(() => {
+    updateSort(sorting[0]?.id, sorting[0]?.desc ? "desc" : "asc");
+  }, [sorting]);
+
   if (isLoading) {
-    return null;
+    return <div className="h-[calc(100vh-25rem)]"></div>;
   }
 
   return (
