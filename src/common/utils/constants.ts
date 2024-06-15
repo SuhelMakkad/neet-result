@@ -1,3 +1,5 @@
+export const BASE_PATH = process.env.BASE_PATH;
+
 export const DATA_PER_PAGE = 10;
 
 export const suhelGithub = "https://github.com/SuhelMakkad";

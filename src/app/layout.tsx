@@ -6,6 +6,7 @@ import { WorkerProvider } from "@/components/worker-context/use-worker";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { NavBar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
+import { BASE_PATH } from "@/utils/constants";
 
 import "@/styles/globals.css";
 
@@ -24,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href={`${BASE_PATH}/favicon.ico`} />
       </head>
       <body className={`${inter.className} bg-background text-primary antialiased`}>
         <WorkerProvider>
