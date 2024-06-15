@@ -13,8 +13,8 @@ import "@/styles/globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "NEET Results",
-  description: "Check NEET results",
+  title: "NEET Exam Results",
+  description: "Check NEET 2024 Exam results",
 };
 
 export default function RootLayout({
