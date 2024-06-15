@@ -17,7 +17,7 @@ export const useResults = () => {
   const { pageNo, pageSize, search, filters } = useFilters();
 
   return useQuery({
-    queryKey: ["results", isLoaded, pageNo, pageSize, search],
+    queryKey: ["results", isLoaded, pageNo, pageSize, search, filters],
     queryFn: () => worker?.getResults({ pageNo, pageSize, search, filters }),
     enabled: isLoaded,
   });

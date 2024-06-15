@@ -6,12 +6,13 @@ import { ResultsTable } from "@/components/results-table";
 import { Error, Loading } from "./page-states";
 
 export const Results = () => {
-  const { data: isDone, isLoading, isError } = useResultsFetch();
-  if (isLoading) {
+  const { data: hasData, isLoading, isError } = useResultsFetch();
+
+  if (isLoading || !hasData) {
     return <Loading />;
   }
 
-  if (isError || !isDone) {
+  if (isError) {
     return <Error />;
   }
 

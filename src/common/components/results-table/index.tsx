@@ -18,13 +18,17 @@ import { Pagination } from "./pagination";
 import { PageSizeSelect } from "./page-size-select";
 
 export const ResultsTable = () => {
-  const { data } = useResults();
+  const { data, isLoading } = useResults();
 
   const table = useReactTable({
     data: data?.data || [],
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
+
+  if (isLoading) {
+    return null;
+  }
 
   return (
     <div className="space-y-3">
